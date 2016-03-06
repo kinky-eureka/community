@@ -1,0 +1,3 @@
+[submodule "lib/lazuli"]
+	path = lib/lazuli
+	url = https://github.com/nonchip/lazuli
