@@ -5,7 +5,7 @@ appname=config.appname or "l0g1n.de"
 class MainLayout extends html.Widget
   @include "views.mixin.header"
   --@include "views.mixin.favicon"
-  --@include "lazuli.modules.user_management.views.mixin_menu"
+  @include "lazuli.modules.user_management.views.mixin_menu"
   content: =>
     html_5 ->
       head ->

@@ -12,4 +12,4 @@ class MixinHeader extends html.Widget
       div class:"pure-menu pure-menu-horizontal",->
         a href:@url_for"index", class:"pure-menu-heading pure-menu-link", appname
         ul class:"pure-menu-list",->
-        --@userManagementMixinMenu!
+        @userManagementMixinMenu!

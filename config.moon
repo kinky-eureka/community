@@ -1,3 +1,5 @@
+--copy this file to custom_config.moon to set secrets
+
 import config from require "lazuli.config"
 
 
