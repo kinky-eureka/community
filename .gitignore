@@ -13,3 +13,4 @@
 *.lua
 /custom_config.moon
 /.sublime-project*
+*.less.css

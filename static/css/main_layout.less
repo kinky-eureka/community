@@ -1,0 +1,76 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.centered {
+  margin: 0 auto;
+}
+
+.pure-g p {
+  margin: 1em 1em;
+}
+
+.margin2 {margin:  2px  2px;}
+.margin5 {margin:  5px  5px;}
+.margin10{margin: 10px 10px;}
+
+body {
+  margin-top: 4em;
+  background: #222;
+  color: #eee;
+  font-family: monospace;
+
+  .header {
+    .pure-menu-horizontal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: black;
+      box-shadow: 0px 0px 30px 0px black;
+      z-index: 999;
+
+      .pure-menu-link {
+        color: white;
+      }
+      .pure-menu-active > .pure-menu-link,
+      .pure-menu-link:hover,
+      .pure-menu-link:focus {
+        background-color: #555;
+      }
+      .pure-menu-selected .pure-menu-link {
+        background-color: #333;
+      }
+      .pure-menu-heading.pure-menu-link {
+        background-color: #111;
+        color: rgba(0,0,0,0.5);
+        text-shadow: 0px 0px 5px rgba(100, 255, 100, 1);
+      }
+      .pure-menu-heading.pure-menu-link,
+      .pure-menu-item:not(:last-child):not(.noborder) .pure-menu-link {
+        border-right: 1px solid #aaa;
+      }
+    }
+  }
+
+  &.route-index {
+  }
+
+}
+
+.lazuli {
+  &.module {
+    &.user_management {
+      &.mixin_menu {
+        position: absolute;
+        right: 0;
+      }
+    }
+  }
+}
