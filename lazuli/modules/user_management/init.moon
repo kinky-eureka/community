@@ -15,6 +15,6 @@ class CustomUsersApplication extends UsersApplication
         @session.login_redirect=nil
         redirect_to: red
       else
-        redirect_to: @url_for"profile_show", profile_id: @modules.user_management.currentuser.id
+        redirect_to: @url_for"profile_show", id: @modules.user_management.currentuser.id
     else
       ret
