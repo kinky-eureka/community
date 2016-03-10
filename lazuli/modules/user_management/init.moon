@@ -8,7 +8,7 @@ class CustomUsersApplication extends UsersApplication
   @superroute login: "/login"
   @superroute register: "/register"
   @superroute register_do: "/register/do"
-  @superroute login_do: "/login/do", [1]:(ret)=>
+  @superroute login_do: "/login/do", (ret)=>
     if @modules.user_management.currentuser
       if @session.login_redirect
         red=@session.login_redirect
