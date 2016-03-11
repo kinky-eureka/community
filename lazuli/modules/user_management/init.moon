@@ -1,7 +1,4 @@
 UsersApplication=require "lib.lazuli.src.lazuli.modules.user_management"
-Users=require "lazuli.modules.user_management.models.users"
-
-
 
 class CustomUsersApplication extends UsersApplication
   @superroute logout: "/logout"
@@ -15,6 +12,6 @@ class CustomUsersApplication extends UsersApplication
         @session.login_redirect=nil
         redirect_to: red
       else
-        redirect_to: @url_for"profile_show", id: @modules.user_management.currentuser.id
+        redirect_to: @url_for "profile_show", id: @modules.user_management.currentuser.id
     else
       ret

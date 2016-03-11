@@ -3,9 +3,8 @@ lazuli = require "lazuli"
 class extends lazuli.Application
   @enable "user_management"
 
-  @include "apps.profile"
+  @name: "profile_"
+  @path: "/profile"
 
-  layout: require "views.main_layout"
-
-  [index: "/"]: =>
+  [show: "/:id[%d]"]: =>
     "WIP!"
