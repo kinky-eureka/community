@@ -7,5 +7,8 @@ class extends lazuli.Application
 
   layout: require "views.main_layout"
 
+  handle_404: =>
+    status: 404, "Error 404: Failed to find route: #{@req.cmd_url}"
+
   [index: "/"]: =>
     "WIP!"
