@@ -26,4 +26,7 @@ class Profiles extends Model
         {"user_id", types.integer}
         "PRIMARY KEY (id)"
       }
+    ->
+      add_column "profiles", "birthday", types.date null: true
+      add_column "profiles", "about", types.text null: true
   }
