@@ -8,14 +8,19 @@ class userManagementMixin
       if @modules.user_management.currentuser
         do
           url=@url_for("profile_show",id: @modules.user_management.currentuser.id)
-          li class: "own_profile_link "..(classes.li or "")..(@req.parsed_url.path==url and " "..classes.active_li or ""), ->
+          li class: (
+                      "own_profile_link pure-menu-has-children pure-menu-allow-hover "..
+                      (classes.li or "")..
+                      (@req.parsed_url.path==url and " "..classes.active_li or "")
+                    ), ->
             a{
               href: url,
               class: classes.a or "",
               @modules.user_management.currentuser.username
             }
-        li class: "logout "..(classes.li or "")..cli"logout", ->
-          a href:@url_for("lazuli_modules_usermanagement_logout"),class:(classes.a or ""), "Logout"
+            ul class: "pure-menu-children", ->
+              li class: "logout "..(classes.li or "")..cli"logout", ->
+                a href:@url_for("lazuli_modules_usermanagement_logout"),class:(classes.a or ""), "Logout"
       else          
         li class: "login "..(classes.li or "")..cli"login", ->
           a href:@url_for("lazuli_modules_usermanagement_login"),class:(classes.a or ""), "Login"

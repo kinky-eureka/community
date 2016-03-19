@@ -14,7 +14,12 @@ class MainLayout extends html.Widget
         link rel:"stylesheet", href:"/static/css/pure-min.css"
         link rel:"stylesheet", href:"/static/css/main_layout.less.css"
         script src:"/static/js/jquery.min.js"
-        title (@title and @title.." - "..appname) or (@has_content_for("title") and @content_for("title").." - "..appname) or appname
+        script src:"/static/js/dropdownmenu.js"
+        title (
+          (@title and @title.." - "..appname) or
+          (@has_content_for("title") and @content_for("title").." - "..appname) or
+          appname
+        )
         --@mixFavicon!
       body class:"route-"..@route_name..(type(@body_classes)=="string" and " "..@body_classes or ""),->
         @mixin_header!
