@@ -1,4 +1,4 @@
-# community
+# KinkyEureka community
 the main project
 
 ## setup
