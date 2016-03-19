@@ -29,4 +29,8 @@ class Profiles extends Model
     ->
       add_column "profiles", "birthday", types.date null: true
       add_column "profiles", "about", types.text null: true
+    ->
+      add_column "profiles", "privacy_birthday_dm", types.boolean
+      add_column "profiles", "privacy_birthday_y", types.boolean
+      add_column "profiles", "privacy_birthday_age", types.boolean default: true
   }

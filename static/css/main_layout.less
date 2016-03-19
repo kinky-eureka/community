@@ -1,7 +1,7 @@
 * {
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
+  -webkit-box-sizing: border-box !important;
+     -moz-box-sizing: border-box !important;
+          box-sizing: border-box !important;
 }
 
 .content {
@@ -31,12 +31,26 @@ body {
     color: black;
   }
 
+  legend,
+  .pure-form legend {
+    color: #f99;
+    border-bottom: none;
+  }
+
+  fieldset,
+  .pure-form fieldset {
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0px 0px 5px -1px black;
+  }
+
   section {
     padding-left: 1em;
     padding-right: 1em;
-    padding-bottom: 2em;
-    margin-bottom: 2em;
-    box-shadow: 1px 2px 5px -1px black;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    box-shadow: 0px 0px 5px -1px black;
   }
 
   .header {
@@ -79,6 +93,19 @@ body {
   }
 
   &.route-index {
+  }
+
+  &.route-profile_edit {
+    textarea {
+      min-height: 15em;
+      min-width: 30em;
+    }
+  }
+
+  &.route-profile_show {
+    section h1 {
+      color: #f99;
+    }
   }
 
 }
