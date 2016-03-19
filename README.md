@@ -3,8 +3,7 @@ the main project
 
 ## setup
 
-    git submodule init
-    git submodule update
+    git submodule update --init --recursive
     lib/lazuli/setup.zsh
     lib/lazuli/luarocks install markdown
 
