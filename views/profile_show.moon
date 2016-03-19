@@ -24,7 +24,7 @@ class ProfileShow extends html.Widget
           if .privacy_birthday_age
             div class: "pure-u-1-3", "Age:"
             div class: "pure-u-2-3", getAge .birthday
-          if .privacy_birthday_dm and .privacy_birthday_y
+          if .privacy_birthday_dm or .privacy_birthday_y
             div class: "pure-u-1-3", "Birthday:"
             div class: "pure-u-2-3", formatBirthday .birthday, .privacy_birthday_dm, .privacy_birthday_y
       if .about

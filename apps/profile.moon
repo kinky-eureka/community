@@ -30,9 +30,9 @@ class extends lazuli.Application
         @profiledata\update{
           about: @params.about
           birthday: @params.birthday
-          privacy_birthday_dm: @params.privacy_birthday_dm
-          privacy_birthday_y: @params.privacy_birthday_y
-          privacy_birthday_age: @params.privacy_birthday_age
+          privacy_birthday_dm: @params.privacy_birthday_dm or false
+          privacy_birthday_y: @params.privacy_birthday_y or false
+          privacy_birthday_age: @params.privacy_birthday_age or false
         }
         return render: true
       else
