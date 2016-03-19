@@ -1,16 +1,12 @@
 import mixin_table from require "moon"
 import create_table, types, add_column from require "lapis.db.schema"
 
-migrations={
-  profiles_000001: =>
-    create_table "profiles", {
-      {"id", types.serial}
-      {"user_id", types.integer}
-      "PRIMARY KEY (id)"
-    }
+migrations={}
 
-}
+mixin_model=(name)-> mixin_table migrations, {"%s_%06d"\format(name,k), v for k,v in pairs (require "models."..name).migrations}
 
 mixin_table migrations, require "lazuli.modules.user_management.migrations"
+
+mixin_model "profiles"
 
 migrations

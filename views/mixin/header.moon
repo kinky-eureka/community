@@ -3,8 +3,8 @@ config = (require "lapis.config").get!
 appname=config.appname or "KinkyEureka"
 
 class MixinHeader extends html.Widget
-  _mixin_header_item:(act,txt)=>
-    url=@url_for(act)
+  _mixin_header_item:(act,txt,...)=>
+    url=@url_for(act,...)
     selcl=(@req.parsed_url.path==url and " pure-menu-selected" or "")
     li class:"pure-menu-item"..selcl,-> a href:url, class:"pure-menu-link",txt
   mixin_header: =>

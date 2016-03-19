@@ -1,8 +1,29 @@
 import Model from require "lapis.db.model"
+import create_table, types, add_column from require "lapis.db.schema"
+Users = require "lazuli.modules.user_management.models.users"
 
 class Profiles extends Model
+  @getOrCreateByUser: (user)=>
+    if type(user)=="number"
+      user=Users\find user
+    return nil, "user not found" unless user
+    obj=(@find{user_id: user.id}) or (@create{user_id: user.id})
+    @@preload_relations {obj}, unpack [i[1] for i in *@@relations]
+    obj
+
   @relations: {
     {"user", belongs_to: "Users"}
   }
-  @get_relation_model: (name)=>
-    require "lazuli.modules.user_management.models.users" if name=="Users"
+
+  @get_relation_model: (name)=> switch name
+    when "Users"
+      require "lazuli.modules.user_management.models.users"
+
+  @migrations: {
+    ->
+      create_table "profiles", {
+        {"id", types.serial}
+        {"user_id", types.integer}
+        "PRIMARY KEY (id)"
+      }
+  }
