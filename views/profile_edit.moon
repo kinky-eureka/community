@@ -21,5 +21,8 @@ class ProfileEdit extends html.Widget
           legend "About me"
           textarea id:"about", name:"about", ->
             raw .about
+          text "This field has "
+          a target:"_blank", href:"https://daringfireball.net/projects/markdown/syntax", "markdown support"
+          text " but you may not use HTML for security reasons."
       div class: "pure-controls", ->
         input type:"submit", class: "pure-button pure-button-primary"

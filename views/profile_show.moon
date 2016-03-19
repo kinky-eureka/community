@@ -12,6 +12,9 @@ getAge=(ymdstr)->
   span=os.time()-os.time{year:y,month:m,day:d}
   (tonumber(os.date("%Y", span)) - 1970)
 
+blankify_links=(htmlstr)->
+  (htmlstr\gsub "<a href", "<a target=\"_blank\" href")
+
 class ProfileShow extends html.Widget
   content: =>
     --pre style: "background: rgba(0,0,0,0.8); padding: 1em; margin: 1em;",->
@@ -31,4 +34,4 @@ class ProfileShow extends html.Widget
         section id:"profile_about", class: "pure-g", ->
           h1 class: "pure-u-1" ,"About me"
           div class: "pure-u-1", ->
-            raw markdown .about\gsub("<[A-Za-z/!$ %-%_\"]*>?", "")
+            raw blankify_links markdown .about\gsub("<[A-Za-z/!$ %-%_\"]*>?", "")
