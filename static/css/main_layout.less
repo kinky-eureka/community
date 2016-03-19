@@ -27,8 +27,16 @@ body {
   color: #eef;
   font-family: monospace;
 
-  input {
+  input, textarea {
     color: black;
+  }
+
+  section {
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 2em;
+    margin-bottom: 2em;
+    box-shadow: 1px 2px 5px -1px black;
   }
 
   .header {
@@ -36,6 +44,7 @@ body {
       position: fixed;
       top: 0;
       left: 0;
+      width: 90%;
       background: black;
       box-shadow: 0px 0px 30px 0px black;
       z-index: 999;
@@ -80,6 +89,12 @@ body {
       &.mixin_menu {
         position: absolute;
         right: 0;
+        //min-width: 15em;
+        &.logged_in {
+          .pure-menu-item {
+            min-width: 100%;
+          }
+        }
       }
     }
   }

@@ -19,6 +19,8 @@ class userManagementMixin
               @modules.user_management.currentuser.username
             }
             ul class: "pure-menu-children", ->
+              li class: "own_profile_edit "..(classes.li or "")..cli"logout", ->
+                a href:@url_for("profile_edit"),class:(classes.a or ""), "Edit profile"
               li class: "logout "..(classes.li or "")..cli"logout", ->
                 a href:@url_for("lazuli_modules_usermanagement_logout"),class:(classes.a or ""), "Logout"
       else          
