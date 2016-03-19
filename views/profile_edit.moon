@@ -12,7 +12,7 @@ class ProfileEdit extends html.Widget
           legend "Birthday"
           input id:"birthday", name:"birthday", type:"date", value: .birthday or ""
           fieldset ->
-            legend "Show:"
+            legend "Show publicly:"
             div class: "pure-control-group", ->
               @mkCheck "privacy_birthday_dm", "Date & Month", .privacy_birthday_dm
               @mkCheck "privacy_birthday_y", "Year", .privacy_birthday_y
