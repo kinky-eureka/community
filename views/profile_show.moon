@@ -34,4 +34,4 @@ class ProfileShow extends html.Widget
         section id:"profile_about", class: "pure-g", ->
           h1 class: "pure-u-1" ,"About me"
           div class: "pure-u-1", ->
-            raw blankify_links markdown .about\gsub("<[A-Za-z/!$ %-%_\"]*>?", "")
+            raw blankify_links markdown .about\gsub("<[A-Za-z/!$][A-Za-z/!$ %-%_\"]*>", "")
