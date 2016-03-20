@@ -7,7 +7,7 @@ formatDate=do
   months={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"}
   (ymdstr,_dm,_y)->
     y,m,d=ymdstr\match "(%d%d%d%d)-(%d%d?)-(%d%d?)"
-    (_dm and d..getDoMsuffix(d).." "..months[tonumber m] or "")..(_dm and _y and " " or "")..(_y and y or "")
+    (_dm and d..getDoMsuffix(d).." of "..months[tonumber m] or "")..(_dm and _y and " " or "")..(_y and y or "")
 
 getAge=(ymdstr)->
   y,m,d=ymdstr\match "(%d%d%d%d)-(%d%d?)-(%d%d?)"

@@ -19,7 +19,7 @@ class ProfileShow extends html.Widget
               text abbrCaps .gender
         if .gender and .privacy_gender
           div class: "pure-u-1-3", "Gender:"
-          div class: "pure-u-2-3", .gender
+          div class: "pure-u-2-3", .gender\lower!
         if .birthday
           if .privacy_birthday_age
             div class: "pure-u-1-3", "Age:"
