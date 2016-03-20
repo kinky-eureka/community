@@ -29,6 +29,6 @@ class ProfileShow extends html.Widget
             div class: "pure-u-2-3", formatDate .birthday, .privacy_birthday_dm, .privacy_birthday_y
       if .about
         section id:"profile_about", class: "pure-g", ->
-          h1 class: "pure-u-1" ,"About me"
+          h1 class: "pure-u-1" ,"About me" unless .about\sub(1,2)=="# "
           div class: "pure-u-1", ->
             raw blankify_links markdown strip_html .about
