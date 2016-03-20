@@ -21,6 +21,6 @@ strip_html=(str)->
   (str\gsub "<[A-Za-z/!$][A-Za-z/!$ %-%_\"]*>", "")
 
 abbrCaps=(str)->
-  (str\gsub "[^A-Z0-9]", "")
+  (str\gsub "[^A-Z]", "")
 
 {:getDoMsuffix, :formatDate, :getAge, :blankify_links, :strip_html, :abbrCaps}

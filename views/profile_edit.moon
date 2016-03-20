@@ -21,8 +21,12 @@ class ProfileEdit extends html.Widget
           legend "Gender"
           input id:"gender", name:"gender", type:"text", list:"genderlist", value: .gender or ""
           datalist id:"genderlist", ->
+            option value: "Agender"
             option value: "Female"
             option value: "Male"
+            option value: "Gender Fluid"
+            option value: "Gender Queer"
+            option value: "Intersex"
           text "Select or type custom, any capitalized letters will be used for abbreviation."
           fieldset ->
             legend "Show:"
