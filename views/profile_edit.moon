@@ -38,5 +38,9 @@ class ProfileEdit extends html.Widget
           text "This field has "
           a target:"_blank", href:"https://daringfireball.net/projects/markdown/syntax", "markdown support"
           text " but you may not use HTML for security reasons."
+          br!
+          text "If the first line is a "
+          code "# 1st level heading"
+          text ", it replaces the \"About me\" heading."
       div class: "pure-controls", ->
         input type:"submit", class: "pure-button pure-button-primary"
