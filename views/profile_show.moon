@@ -1,11 +1,16 @@
 html = require "lapis.html"
 markdown = require "markdown" -- lib/lazuli/luarocks install markdown
 
-months={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"}
+getDoMsuffix=do
+  suffixes={"st","nd","rd",default:"th"}
+  (day)->
+    suffixes[day % 10] or suffixes.default
 
-formatBirthday=(ymdstr,_dm,_y)->
-  y,m,d=ymdstr\match "(%d%d%d%d)-(%d%d?)-(%d%d?)"
-  (_dm and d..". "..months[tonumber m] or "")..(_dm and _y and " " or "")..(_y and y or "")
+formatBirthday=do
+  months={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"}
+  (ymdstr,_dm,_y)->
+    y,m,d=ymdstr\match "(%d%d%d%d)-(%d%d?)-(%d%d?)"
+    (_dm and d..getDoMsuffix(d).." "..months[tonumber m] or "")..(_dm and _y and " " or "")..(_y and y or "")
 
 getAge=(ymdstr)->
   y,m,d=ymdstr\match "(%d%d%d%d)-(%d%d?)-(%d%d?)"
