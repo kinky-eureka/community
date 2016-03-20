@@ -2,6 +2,7 @@ lazuli = require "lazuli"
 Profiles = require "models.profiles"
 import respond_to from require "lapis.application"
 
+import NULL from require "lapis.db"
 
 class extends lazuli.Application
   @enable "user_management"
@@ -28,13 +29,13 @@ class extends lazuli.Application
       if @modules.user_management.currentuser
         @profiledata,err=Profiles\getOrCreateByUser @modules.user_management.currentuser
         @profiledata\update{
-          about: @params.about
-          birthday: @params.birthday
-          privacy_birthday_dm: @params.privacy_birthday_dm or false
-          privacy_birthday_y: @params.privacy_birthday_y or false
-          privacy_birthday_age: @params.privacy_birthday_age or false
-          gender: @params.gender
-          privacy_gender: @params.privacy_gender or false
+          about: @params.about or NULL
+          birthday: @params.birthday\find"%d%d%d%d-%d%d?-%d%d?" and @params.birthday or NULL
+          privacy_birthday_dm: @params.privacy_birthday_dm and true or false
+          privacy_birthday_y: @params.privacy_birthday_y and true or false
+          privacy_birthday_age: @params.privacy_birthday_age and true or false
+          gender: @params.gender or NULL
+          privacy_gender: @params.privacy_gender and true or false
         }
         return render: true
       else
