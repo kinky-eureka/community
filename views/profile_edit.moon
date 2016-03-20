@@ -18,6 +18,17 @@ class ProfileEdit extends html.Widget
               @mkCheck "privacy_birthday_y", "Year", .privacy_birthday_y
               @mkCheck "privacy_birthday_age", "Age in years", .privacy_birthday_age
         fieldset ->
+          legend "Gender"
+          input id:"gender", name:"gender", type:"text", list:"genderlist", value: .gender or ""
+          datalist id:"genderlist", ->
+            option value: "Female"
+            option value: "Male"
+          text "Select or type custom, any capitalized letters will be used for abbreviation."
+          fieldset ->
+            legend "Show:"
+            div class: "pure-control-group", ->
+              @mkCheck "privacy_gender", "Publicly", .privacy_gender
+        fieldset ->
           legend "About me"
           textarea id:"about", name:"about", ->
             raw .about

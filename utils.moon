@@ -20,4 +20,7 @@ blankify_links=(htmlstr)->
 strip_html=(str)->
   (str\gsub "<[A-Za-z/!$][A-Za-z/!$ %-%_\"]*>", "")
 
-{:getDoMsuffix, :formatDate, :getAge, :blankify_links, :strip_html}
+abbrCaps=(str)->
+  (str\gsub "[^A-Z0-9]", "")
+
+{:getDoMsuffix, :formatDate, :getAge, :blankify_links, :strip_html, :abbrCaps}

@@ -1,4 +1,4 @@
-import Model from require "lapis.db.model"
+import Model, enum from require "lapis.db.model"
 import create_table, types, add_column from require "lapis.db.schema"
 Users = require "lazuli.modules.user_management.models.users"
 
@@ -33,4 +33,7 @@ class Profiles extends Model
       add_column "profiles", "privacy_birthday_dm", types.boolean
       add_column "profiles", "privacy_birthday_y", types.boolean
       add_column "profiles", "privacy_birthday_age", types.boolean default: true
+    ->
+      add_column "profiles", "gender", types.varchar null: true
+      add_column "profiles", "privacy_gender", types.boolean
   }

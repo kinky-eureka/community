@@ -4,6 +4,17 @@
           box-sizing: border-box !important;
 }
 
+::-webkit-inner-spin-button,
+::-webkit-clear-button {
+    display: none; /* Hide the button */
+    -webkit-appearance: none; /* turn off default browser styling */
+}
+
+::-webkit-calendar-picker-indicator {
+  opacity: 100;
+}
+
+
 .content {
   margin: 0 auto;
   max-width: 1000px;
@@ -118,6 +129,10 @@ body {
   &.route-profile_show {
     section h1 {
       color: #f99;
+    }
+    .shortInfo {
+      color: #99f;
+      margin-left: .5em;
     }
   }
 
