@@ -15,6 +15,9 @@ getAge=(ymdstr)->
 blankify_links=(htmlstr)->
   (htmlstr\gsub "<a href", "<a target=\"_blank\" href")
 
+strip_html=(str)->
+  (str\gsub "<[A-Za-z/!$][A-Za-z/!$ %-%_\"]*>", "")
+
 class ProfileShow extends html.Widget
   content: =>
     --pre style: "background: rgba(0,0,0,0.8); padding: 1em; margin: 1em;",->
@@ -34,4 +37,4 @@ class ProfileShow extends html.Widget
         section id:"profile_about", class: "pure-g", ->
           h1 class: "pure-u-1" ,"About me"
           div class: "pure-u-1", ->
-            raw blankify_links markdown .about\gsub("<[A-Za-z/!$][A-Za-z/!$ %-%_\"]*>", "")
+            raw blankify_links markdown strip_html .about
