@@ -25,7 +25,6 @@ class ProfileEdit extends html.Widget
             option value: "Female"
             option value: "Male"
             option value: "Gender Fluid"
-            option value: "Gender Queer"
             option value: "Intersex"
           text "Select or type custom, any capitalized letters will be used for abbreviation."
           fieldset ->
