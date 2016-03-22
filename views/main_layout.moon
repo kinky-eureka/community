@@ -3,9 +3,6 @@ config = (require "lapis.config").get!
 appname=config.appname or "l0g1n.de"
 
 class MainLayout extends html.Widget
-  --@include "views.mixin.header"
-  --@include "views.mixin.favicon"
-  --@include "lazuli.modules.user_management.views.mixin_menu"
   content: =>
    html_5 ->
       head ->
@@ -20,9 +17,7 @@ class MainLayout extends html.Widget
           (@has_content_for("title") and @content_for("title").." - "..appname) or
           appname
         )
-        --@mixFavicon!
       body class:"route-"..@route_name..(type(@body_classes)=="string" and " "..@body_classes or ""),->
-        --@mixin_header!
         render "views.widgets.header"
         div class:"content",->
           @content_for "inner"
