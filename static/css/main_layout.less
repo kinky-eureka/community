@@ -114,6 +114,14 @@ body {
         box-shadow: 0px 0px 5px 0px black;
       }
     }
+    .usermenu {
+      position: absolute;
+      right: 0;
+      //min-width: 15em;
+      .pure-menu-item {
+        min-width: 100%;
+      }
+    }
   }
 
   &.route-index {
@@ -144,12 +152,6 @@ body {
       &.mixin_menu {
         position: absolute;
         right: 0;
-        //min-width: 15em;
-        &.logged_in {
-          .pure-menu-item {
-            min-width: 100%;
-          }
-        }
       }
     }
   }

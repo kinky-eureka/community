@@ -3,11 +3,11 @@ config = (require "lapis.config").get!
 appname=config.appname or "l0g1n.de"
 
 class MainLayout extends html.Widget
-  @include "views.mixin.header"
+  --@include "views.mixin.header"
   --@include "views.mixin.favicon"
-  @include "lazuli.modules.user_management.views.mixin_menu"
+  --@include "lazuli.modules.user_management.views.mixin_menu"
   content: =>
-    html_5 ->
+   html_5 ->
       head ->
         meta charset:"utf-8"
         meta name:"viewport", content:"width=device-width, initial-scale=1"
@@ -22,6 +22,7 @@ class MainLayout extends html.Widget
         )
         --@mixFavicon!
       body class:"route-"..@route_name..(type(@body_classes)=="string" and " "..@body_classes or ""),->
-        @mixin_header!
+        --@mixin_header!
+        render "views.widgets.header"
         div class:"content",->
           @content_for "inner"
