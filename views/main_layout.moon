@@ -1,6 +1,6 @@
 html = require "lapis.html"
 config = (require "lapis.config").get!
-appname=config.appname or "l0g1n.de"
+appname=config.appname or "KinkyEureka"
 
 class MainLayout extends html.Widget
   content: =>
