@@ -6,8 +6,8 @@ class ACL_Entries extends Model
 
   @relations: {
     {"acl", belongs_to: "ACLs"}
-    {"target_user", belongs_to: "Users"}
-    {"target_include", belongs_to: "ACLs"}
+    --{"target_user", belongs_to: "Users"}
+    --{"target_include", belongs_to: "ACLs"}
   }
 
   @get_relation_model: (name)=> switch name
@@ -18,7 +18,13 @@ class ACL_Entries extends Model
 
   @target_types: enum {
     include: 1
-    user: 2
+    include_inverted: 2
+    user: 3
+  }
+
+  @special_targets: enum {
+    include_everyone: -1
+    include_logged_in: -2
   }
 
   @migrations: {
@@ -29,8 +35,7 @@ class ACL_Entries extends Model
         {"position",          types.integer default: 0}
         {"policy",            types.boolean}
         {"target_type",       types.integer}
-        {"target_user_id",    types.integer null: true}
-        {"target_include_id", types.integer null: true}
+        {"target_id",    types.integer null: true}
         "PRIMARY KEY (id)"
       }
   }
