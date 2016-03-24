@@ -35,7 +35,7 @@ class ACL_Entries extends Model
         {"position",          types.integer default: 0}
         {"policy",            types.boolean}
         {"target_type",       types.integer}
-        {"target_id",    types.integer null: true}
+        {"target_id",         types.integer null: true}
         "PRIMARY KEY (id)"
       }
   }
