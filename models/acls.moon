@@ -7,17 +7,20 @@ ACL_Entries = require "models.acl_entries"
 
 class ACLs extends Model
 
+  -- user is one of:
+  --  * "lazuli.modules.user_management.models.users" instance
+  --  * user id (number) to be found by that model
+  --  * nil if no user is logged in/applicable
   matchUser: (user,return_default=true)=>
-    if user ~= -1
+    if user
       if type(user)=="number"
         user=Users\find user
       return nil, "user not found" unless user
     entries=ACL_Entries\select "where acl_id = ? order by position asc nulls first, id", @id
     for entry in *entries
       ret, err=entry\matchUser user
-      return true     if ret == true
-      return false    if ret == false
       return nil, err if ret == nil and err
+      return ret if type(ret)=="boolean"
     if return_default
       return @default_policy
 

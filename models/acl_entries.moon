@@ -7,28 +7,29 @@ ACLs = require "models.acls"
 class ACL_Entries extends Model
 
   matchUser: (user)=>
-    if user ~= -1
+    if user
       if type(user)=="number"
         user=Users\find user
       return nil, "user not found" unless user
     switch @target_type
       when @@target_types.user
-        if @target_id == user.id
+        if user and @target_id == user.id
           return @policy
       when @@target_types.include, @@target_types.include_inverted
         switch @target_id
           when @@special_targets.include_everyone
             return @policy
           when @@special_targets.include_logged_in
-            if user ~= -1
+            if user
               return @policy
           else
             list=ACLs\find @target_id
             return nil, "include "..tostring(@target_id).." not found" unless list
             ret=list\matchUser user, false
-            return true     if ret == true
-            return false    if ret == false
             return nil, err if ret == nil and err
+            if type(ret)=="boolean"
+              return not ret if @target_type == @@target_types.include_inverted
+              return ret
 
 
   @relations: {
