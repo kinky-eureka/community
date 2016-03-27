@@ -23,15 +23,15 @@ class ACLs extends Model
         if type(user)=="number"
           user=Users\find user
         return nil, "user not found" unless user
-      cname=(user and tostring(user.id) or "[nil]").."-"..@id
+      cname=(user and tostring(user.id) or "[N]").."-"..@id
       cached=ngx.shared.acl_cache\get cname
-      return @default_policy if cached == "[default]"
+      return @default_policy if cached == "[D]"
       return cached if cached ~= nil
       ret,err=_logic user
       if type(ret)=="boolean"
         ngx.shared.acl_cache\set cname, ret, 10
       if not ret and not err and return_default
-        ngx.shared.acl_cache\set cname, "[default]", 10
+        ngx.shared.acl_cache\set cname, "[D]", 10
         return @default_policy
       return ret, err
 
