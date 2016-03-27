@@ -12,7 +12,7 @@ class ACLs extends Model
   --  * user id (number) to be found by that model
   --  * nil if no user is logged in/applicable
   matchUser: do
-    _logic= (user,return_default=true)=>
+    _logic= (user,return_default=true)->
       entries=ACL_Entries\select "where acl_id = ? order by position asc nulls first, id", @id
       for entry in *entries
         ret, err=entry\matchUser user
