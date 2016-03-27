@@ -13,6 +13,7 @@ config {"development","test"}, ->
   session_name "<EDIT THIS>"
   secret "<EDIT THIS>"
   port 8080
+  acl_cache_size "1m"
   modules ->
     user_management ->
       providers ->
@@ -23,5 +24,7 @@ config "production", ->
     database "<EDIT THIS>"
     password "<EDIT THIS>"
   port 8081 -- EDIT THIS
+  page_cache_size "10m"
+  acl_cache_size "5m"
   session_name "<EDIT THIS>"
   secret "<EDIT THIS>"
