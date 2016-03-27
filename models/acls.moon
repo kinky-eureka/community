@@ -30,7 +30,7 @@ class ACLs extends Model
       ret,err=_logic user
       if type(ret)=="boolean"
         ngx.shared.acl_cache\set cname, ret, 10
-      if not ret and not err and return_default
+      if ret==nil and not err and return_default
         ngx.shared.acl_cache\set cname, "[D]", 10
         return @default_policy
       return ret, err
