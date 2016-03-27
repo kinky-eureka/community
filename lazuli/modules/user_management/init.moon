@@ -1,8 +1,31 @@
 UsersApplication=require "lib.lazuli.src.lazuli.modules.user_management"
 Profiles = require "models.profiles"
+ACLs = require "models.acls"
+ACL_Entries = require "models.acl_entries"
 
 prepareUserProfile=(user)->
   profile=Profiles\getOrCreateByUser user
+  nobodyACL=ACLs\create {
+    user_id: user.id
+    name: "nobody"
+    default_policy: false
+  }
+  everyoneACL=ACLs\create {
+    user_id: user.id
+    name: "everyone"
+    default_policy: true
+  }
+  usersACL=ACLs\create {
+    user_id: user.id
+    name: "logged in users"
+    default_policy: false
+  }
+  ACL_Entries\create {
+    acl_id: usersACL.id
+    target_type: ACL_Entries.target_types.include
+    target_id: ACL_Entries.special_targets.include_logged_in
+    policy: true
+  }
   -- TODO: default ACLs, etc.
 
 

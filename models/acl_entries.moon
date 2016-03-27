@@ -2,7 +2,6 @@ import Model, enum from require "lapis.db.model"
 import create_table, types, add_column from require "lapis.db.schema"
 
 Users = require "lazuli.modules.user_management.models.users"
-ACLs = require "models.acls"
 
 class ACL_Entries extends Model
 
@@ -22,6 +21,7 @@ class ACL_Entries extends Model
           when @@special_targets.include_logged_in
             return @policy if user
           else
+            ACLs = require "models.acls"
             list=ACLs\find @target_id
             return nil, "include "..tostring(@target_id).." not found" unless list
             ret=list\matchUser user, false
