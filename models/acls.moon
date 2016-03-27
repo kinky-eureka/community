@@ -12,14 +12,12 @@ class ACLs extends Model
   --  * user id (number) to be found by that model
   --  * nil if no user is logged in/applicable
   matchUser: do
-    _logic= (user,return_default=true)->
+    _logic= (user)->
       entries=ACL_Entries\select "where acl_id = ? order by position asc nulls first, id", @id
       for entry in *entries
         ret, err=entry\matchUser user
         return nil, err if ret == nil and err
         return ret if type(ret)=="boolean"
-      if return_default
-        return @default_policy
     (user,return_default=true)=>
       if user
         if type(user)=="number"
@@ -27,10 +25,14 @@ class ACLs extends Model
         return nil, "user not found" unless user
       cname=(user and tostring(user.id) or "[nil]").."-"..@id
       cached=ngx.shared.acl_cache\get cname
+      return @default_policy if cached == "[default]"
       return cached if cached ~= nil
-      ret,err=_logic user, return_default
+      ret,err=_logic user
       if type(ret)=="boolean"
         ngx.shared.acl_cache\set cname, ret, 10
+      if not ret and not err and return_default
+        ngx.shared.acl_cache\set cname, "[default]", 10
+        return @default_policy
       return ret, err
 
 
