@@ -20,8 +20,7 @@ class ACL_Entries extends Model
           when @@special_targets.include_everyone
             return @policy
           when @@special_targets.include_logged_in
-            if user
-              return @policy
+            return @policy if user
           else
             list=ACLs\find @target_id
             return nil, "include "..tostring(@target_id).." not found" unless list
