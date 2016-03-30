@@ -1,5 +1,5 @@
 # KinkyEureka community
-the main project
+[![Ready](https://badge.waffle.io/kinky-eureka/community.svg?label=ready&title=Ready)](http://waffle.io/kinky-eureka/community) [![In Progress](https://badge.waffle.io/kinky-eureka/community.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/kinky-eureka/community)
 
 ## setup
 
