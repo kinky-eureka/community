@@ -14,7 +14,7 @@ class Profiles extends Model
     {"acl_gender",      belongs_to: "ACLs"}
     {"acl_birthday_y",  belongs_to: "ACLs"}
     {"acl_birthday_dm", belongs_to: "ACLs"}
-    {"acl_about", belongs_to: "ACLs"}
+    {"acl_about",       belongs_to: "ACLs"}
   }
 
   @get_relation_model: (name)=> switch name
