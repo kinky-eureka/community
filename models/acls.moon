@@ -55,4 +55,6 @@ class ACLs extends Model
         {"default_policy", types.boolean}
         "PRIMARY KEY (id)"
       }
+    ->
+      add_column "acls", "readonly", types.boolean default: false
   }

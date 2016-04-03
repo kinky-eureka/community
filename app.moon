@@ -4,6 +4,7 @@ class extends lazuli.Application
   @enable "user_management"
 
   @include "apps.profile"
+  @include "apps.acls"
 
   layout: require "views.main_layout"
 

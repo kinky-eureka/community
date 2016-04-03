@@ -9,16 +9,19 @@ prepareUserProfile=(user)->
     user_id: user.id
     name: "nobody"
     default_policy: false
+    readonly: true
   }
   everyoneACL=ACLs\create {
     user_id: user.id
     name: "everyone"
     default_policy: true
+    readonly: true
   }
   usersACL=ACLs\create {
     user_id: user.id
     name: "logged in users"
     default_policy: false
+    readonly: true
   }
   ACL_Entries\create {
     acl_id: usersACL.id
