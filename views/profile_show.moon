@@ -1,13 +1,16 @@
 html = require "lapis.html"
 markdown = require "markdown" -- lib/lazuli/luarocks install markdown
 
+config = require"lapis.config".get!
+
 import getDoMsuffix, formatDate, getAge, blankify_links, strip_html, abbrCaps from require "utils"
 
 class ProfileShow extends html.Widget
   content: =>
-    --pre style: "background: rgba(0,0,0,0.8); padding: 1em; margin: 1em;",->
-    --  code ->
-    --    text require"moonscript.util".dump @profiledata
+    if false and config.envmode == "development"
+      pre style: "background: rgba(0,0,0,0.8); padding: 1em; margin: 1em;",->
+        code ->
+          text require"moonscript.util".dump @profiledata
     with @profiledata
       section id:"profile_summary", class: "pure-g", ->
         h1 class: "pure-u-1", ->
