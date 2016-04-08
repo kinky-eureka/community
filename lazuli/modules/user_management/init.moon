@@ -2,6 +2,8 @@ UsersApplication=require "lib.lazuli.src.lazuli.modules.user_management"
 Profiles = require "models.profiles"
 ACLs = require "models.acls"
 ACL_Entries = require "models.acl_entries"
+config = (require "lapis.config").get!
+csrf = require "lapis.csrf"
 
 prepareUserProfile=(user)->
   profile=Profiles\getOrCreateByUser user
@@ -31,6 +33,19 @@ prepareUserProfile=(user)->
 
 
 class CustomUsersApplication extends UsersApplication
+  @before_filter =>
+    if @req.parsed_url.path=="/users/register/do" and @req.params_post.key~="swordfish"
+      @write redirect_to: @url_for "index"
+    @modules.user_management or={}
+    @session.modules.user_management or={}
+    if not @modules.user_management.providers
+      if type(config.modules.user_management)=="table" and type(config.modules.user_management.providers)=="table"
+        @modules.user_management.providers={k,require(k)(@,k,v) for k,v in pairs config.modules.user_management.providers}
+      else
+        @modules.user_management.providers={}
+    @modules.user_management.csrf_token = csrf.generate_token @, "lazuli_modules_usermanagement"
+    if @session.modules.user_management.currentuser and not @modules.user_management.currentuser
+      @modules.user_management.currentuser = Users\find @session.modules.user_management.currentuser
   @superroute logout: "/logout"
   @superroute login: "/login"
   @superroute register: "/register"
