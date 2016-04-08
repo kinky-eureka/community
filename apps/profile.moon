@@ -15,10 +15,10 @@ class extends lazuli.Application
     @profiledata,err=Profiles\getOrCreateByUser tonumber @params.id
     if @profiledata
       @acls={
-        gender:      @profiledata.acl_gender_id      and @profiledata\get_acl_gender!\matchUser      @modules.user_management.currentuser
-        birthday_y:  @profiledata.acl_birthday_y_id  and @profiledata\get_acl_birthday_y!\matchUser  @modules.user_management.currentuser
-        birthday_dm: @profiledata.acl_birthday_dm_id and @profiledata\get_acl_birthday_dm!\matchUser @modules.user_management.currentuser
-        about:       @profiledata.acl_about_id       and @profiledata\get_acl_about!\matchUser       @modules.user_management.currentuser
+        gender:      @profiledata.acl_gender_id>0      and @profiledata\get_acl_gender!\matchUser      @modules.user_management.currentuser
+        birthday_y:  @profiledata.acl_birthday_y_id>0  and @profiledata\get_acl_birthday_y!\matchUser  @modules.user_management.currentuser
+        birthday_dm: @profiledata.acl_birthday_dm_id>0 and @profiledata\get_acl_birthday_dm!\matchUser @modules.user_management.currentuser
+        about:       @profiledata.acl_about_id>0       and @profiledata\get_acl_about!\matchUser       @modules.user_management.currentuser
       }
       return render: true
     else

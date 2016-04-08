@@ -1,3 +1,4 @@
+import hmac_sha1, encode_base64 from require "lapis.util.encoding"
 UsersApplication=require "lib.lazuli.src.lazuli.modules.user_management"
 Profiles = require "models.profiles"
 ACLs = require "models.acls"
@@ -34,7 +35,7 @@ prepareUserProfile=(user)->
 
 class CustomUsersApplication extends UsersApplication
   @before_filter =>
-    if @req.parsed_url.path=="/users/register/do" and @req.params_post.key~="swordfish"
+    if @req.parsed_url.path=="/users/register/do" and @req.params_post.key~=encode_base64 hmac_sha1 config.secret, @req.params_post.username
       @write redirect_to: @url_for "index"
     @modules.user_management or={}
     @session.modules.user_management or={}
