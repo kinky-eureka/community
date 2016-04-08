@@ -28,14 +28,14 @@ class extends lazuli.Application
     GET: =>
       if @modules.user_management.currentuser
         @profiledata,err=Profiles\getOrCreateByUser @modules.user_management.currentuser
-        @acls=ACLs\select user_id: @modules.user_management.currentuser.id
+        @acls=ACLs\select "where user_id=?", @modules.user_management.currentuser.id
         return render: true
       else
         @session.login_redirect=@req.parsed_url.path
         return redirect_to: @url_for "lazuli_modules_usermanagement_login"
     POST: =>
       if @modules.user_management.currentuser
-        @acls=ACLs\select user_id: @modules.user_management.currentuser.id
+        @acls=ACLs\select "where user_id=?", @modules.user_management.currentuser.id
         @profiledata,err=Profiles\getOrCreateByUser @modules.user_management.currentuser
         @profiledata\update{
           about: @params.about or NULL

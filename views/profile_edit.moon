@@ -1,4 +1,5 @@
 html = require "lapis.html"
+config = require"lapis.config".get!
 
 class ProfileEdit extends html.Widget
   mkCheck:(name,txt,val)=>
@@ -9,9 +10,10 @@ class ProfileEdit extends html.Widget
     for acl in *@acls
       option value: acl.id, selected:(acl.id==sel and true or nil), acl.name
   content: =>
-    --pre style: "background: rgba(0,0,0,0.8); padding: 1em; margin: 1em;",->
-    --  code ->
-    --    text require"moonscript.util".dump @acls
+    if false and config.envmode == "development"
+      pre style: "background: rgba(0,0,0,0.8); padding: 1em; margin: 1em;",->
+        code ->
+          text require"moonscript.util".dump @acls
     form action:@url_for("profile_edit"), class: "pure-form pure-form-stacked", method:"post", ->
       with @profiledata
         fieldset ->
