@@ -1,4 +1,5 @@
 lazuli = require "lazuli"
+import respond_to from require "lapis.application"
 
 import hmac_sha1, encode_base64 from require "lapis.util.encoding"
 config = (require "lapis.config").get!
@@ -19,4 +20,20 @@ class extends lazuli.Application
   [make_invite_key: "/mik/:username"]: =>
     if @modules.user_management.currentuser
       if config.projectStage=="alpha" and @modules.user_management.currentuser.id==1 or config.projectStage=="beta"
-        encode_base64 hmac_sha1 config.secret, @params.username
+        return layout: false, encode_base64 hmac_sha1 config.secret, @params.username
+
+  [make_invite_key_form: "/mik"]: respond_to {
+    GET: =>
+      if not config.projectStage=="beta"
+        return redirect_to: @url_for "index"
+      if not @modules.user_management.currentuser
+        return redirect_to: @url_for "lazuli_modules_usermanagement_login"
+      render: true
+    POST: =>
+      if not config.projectStage=="beta"
+        return redirect_to: @url_for "index"
+      if not @modules.user_management.currentuser
+        return redirect_to: @url_for "lazuli_modules_usermanagement_login"
+      @invkey=encode_base64 hmac_sha1 config.secret, @params.username
+      render: true
+  }
