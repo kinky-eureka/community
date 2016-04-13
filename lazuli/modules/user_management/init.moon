@@ -35,8 +35,9 @@ prepareUserProfile=(user)->
 
 class CustomUsersApplication extends UsersApplication
   @before_filter =>
-    if @req.parsed_url.path=="/users/register/do" and @req.params_post.key~=encode_base64 hmac_sha1 config.secret, @req.params_post.username
-      @write redirect_to: @url_for "index"
+    if config.projectStage=="alpha" or config.projectStage=="beta"
+      if @req.parsed_url.path=="/users/register/do" and @req.params_post.key~=encode_base64 hmac_sha1 config.secret, @req.params_post.username
+        @write redirect_to: @url_for "index"
     @modules.user_management or={}
     @session.modules.user_management or={}
     if not @modules.user_management.providers

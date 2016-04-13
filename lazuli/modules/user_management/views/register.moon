@@ -1,4 +1,5 @@
 import Widget from require "lapis.html"
+config = (require "lapis.config").get!
 
 class RegisterWithKey extends Widget
   content: =>
@@ -15,8 +16,9 @@ class RegisterWithKey extends Widget
         div class: "pure-control-group", ->
           label for: "password_repeat", "Repeat:"
           input id: "password_repeat", type: "password",name: "password_repeat"
-        div class: "pure-control-group", ->
-          label for: "key", "Invitation Key:"
-          input id: "key", name: "key"
+        if config.projectStage=="alpha" or config.projectStage=="beta"
+          div class: "pure-control-group", ->
+            label for: "key", "Invitation Key ("..config.projectStage.."):"
+            input id: "key", name: "key"
         div class: "pure-controls", ->
           input type: "submit", class: "pure-button pure-button-primary"

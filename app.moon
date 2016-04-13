@@ -17,5 +17,6 @@ class extends lazuli.Application
     "WIP!"
 
   [make_invite_key: "/mik/:username"]: =>
-    if @modules.user_management.currentuser.id==1
-      encode_base64 hmac_sha1 config.secret, @params.username
+    if @modules.user_management.currentuser
+      if config.projectStage=="alpha" and @modules.user_management.currentuser.id==1 or config.projectStage=="beta"
+        encode_base64 hmac_sha1 config.secret, @params.username

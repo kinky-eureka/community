@@ -5,6 +5,9 @@ import config from require "lazuli.config"
 
 config {"development","test","production"},->
   set "appname", "KinkyEureka"
+  set "projectStage", "alpha"
+  --set "projectStage", "beta"
+  --set "projectStage", "1.0"
 
 config {"development","test"}, ->
   postgres ->
