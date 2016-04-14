@@ -7,7 +7,7 @@ class extends Widget
       text "Give the following key to the person who wants to register as "
       b style: "background: rgba(0,0,0,0.8); padding: 2px;", @params.username
       text ":"
-      pre style: "background: rgba(0,0,0,0.8); padding: 1em; margin: 1em;",->
+      pre style: "background: rgba(0,0,0,0.8); padding: 1em; margin: 1em; text-align: center;",->
         code ->
           text @invkey
       h2 "Create another"
