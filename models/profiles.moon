@@ -1,13 +1,14 @@
 import Model, enum from require "lapis.db.model"
 import create_table, types, add_column, drop_column from require "lapis.db.schema"
 Users = require "lazuli.modules.user_management.models.users"
+config = (require "lapis.config").get!
 
 class Profiles extends Model
   @getOrCreateByUser: (user)=>
     if type(user)=="number"
       user=Users\find user
     return nil, "user not found" unless user
-    (@find{user_id: user.id}) or (@create{user_id: user.id})
+    (@find{user_id: user.id}) or (@create{user_id: user.id, registered_in_project_stage: config.projectStage})
 
   @relations: {
     {"user",            belongs_to: "Users"}
@@ -50,4 +51,6 @@ class Profiles extends Model
       add_column  "profiles", "acl_birthday_y_id",    types.integer null: true
     ->
       add_column  "profiles", "acl_about_id",    types.integer null: true
+    ->
+      add_column  "profiles", "registered_in_project_stage", types.varchar default: "alpha"
   }
