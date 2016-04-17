@@ -65,3 +65,25 @@ class CustomUsersApplication extends UsersApplication
         redirect_to: @url_for "profile_show", id: @modules.user_management.currentuser.id
     else
       ret
+
+  @change_user_name: (user, newname, password)->
+    if type(user)=="number"
+      user=Users\find user
+    return nil, "user not found" unless user
+    oldhash=encode_base64(hmac_sha1(password,user.username..password))
+    newhash=encode_base64(hmac_sha1(password,newname..password))
+    return nil, "wrong password" unless user.pwHMACs1==oldhash
+    user\update{
+      username: newname
+      pwHMACs1: newhash
+    }
+
+  @change_password: (user, newpassword)->
+    if type(user)=="number"
+      user=Users\find user
+    return nil, "user not found" unless user
+    newhash=encode_base64(hmac_sha1(newpassword,user.username..newpassword))
+    user\update{
+      pwHMACs1: newhash
+    }
+
