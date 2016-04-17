@@ -5,6 +5,7 @@ ACLs = require "models.acls"
 ACL_Entries = require "models.acl_entries"
 config = (require "lapis.config").get!
 csrf = require "lapis.csrf"
+Users = require "lazuli.modules.user_management.models.users"
 
 prepareUserProfile=(user)->
   profile=Profiles\getOrCreateByUser user
