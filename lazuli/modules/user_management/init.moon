@@ -7,6 +7,9 @@ config = (require "lapis.config").get!
 csrf = require "lapis.csrf"
 Users = require "lazuli.modules.user_management.models.users"
 
+import hash_password, verify_password from require "lazuli.modules.user_management.crypto"
+
+
 prepareUserProfile=(user)->
   profile=Profiles\getOrCreateByUser user
   nobodyACL=ACLs\create {
@@ -71,20 +74,19 @@ class CustomUsersApplication extends UsersApplication
     if type(user)=="number"
       user=Users\find user
     return nil, "user not found" unless user
-    oldhash=encode_base64(hmac_sha1(password,user.username..password))
-    newhash=encode_base64(hmac_sha1(password,newname..password))
-    return nil, "wrong password" unless user.pwHMACs1==oldhash
+    newhash=hash_password newname, password
+    return nil, "wrong password" unless verify_password user.username, password, user.pwHash
     user\update{
       username: newname
-      pwHMACs1: newhash
+      pwHash: newhash
     }
 
   @change_password: (user, newpassword)->
     if type(user)=="number"
       user=Users\find user
     return nil, "user not found" unless user
-    newhash=encode_base64(hmac_sha1(newpassword,user.username..newpassword))
+    newhash=hash_password user.username, newpassword
     user\update{
-      pwHMACs1: newhash
+      pwHash: newhash
     }
 
