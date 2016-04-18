@@ -24,16 +24,18 @@ class extends lazuli.Application
 
   [make_invite_key_form: "/mik"]: respond_to {
     GET: =>
-      if not config.projectStage=="beta"
-        return redirect_to: @url_for "index"
       if not @modules.user_management.currentuser
         return redirect_to: @url_for "lazuli_modules_usermanagement_login"
+      if config.projectStage~="beta"
+        if not (@modules.user_management.currentuser and @modules.user_management.currentuser.is_admin)
+          return redirect_to: @url_for "index"
       render: true
     POST: =>
-      if not config.projectStage=="beta"
-        return redirect_to: @url_for "index"
       if not @modules.user_management.currentuser
         return redirect_to: @url_for "lazuli_modules_usermanagement_login"
+      if config.projectStage~="beta"
+        if not (@modules.user_management.currentuser and @modules.user_management.currentuser.is_admin)
+          return redirect_to: @url_for "index"
       @invkey=encode_base64 hmac_sha1 config.secret, @params.username
       render: true
   }
