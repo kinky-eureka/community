@@ -23,7 +23,7 @@ class Header extends html.Widget
               a href: url, class: "pure-menu-link", @modules.user_management.currentuser.username
               ul class: "pure-menu-children", ->
                 @header_item "profile_edit", "Edit profile"
-                if config.projectStage=="alpha" and @modules.user_management.currentuser.id==1 or config.projectStage=="beta"
+                if config.projectStage=="alpha" and @modules.user_management.currentuser.is_admin or config.projectStage=="beta"
                   @header_item "make_invite_key_form", "Create invite key!"
                 @header_item "lazuli_modules_usermanagement_logout", "Logout"
         else
