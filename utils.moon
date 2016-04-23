@@ -14,13 +14,18 @@ getAge=(ymdstr)->
   span=os.time()-os.time{year:y,month:m,day:d}
   (tonumber(os.date("%Y", span)) - 1970)
 
-blankify_links=(htmlstr)->
+blankifyLinks=(htmlstr)->
   (htmlstr\gsub "<a href", "<a target=\"_blank\" href")
 
-strip_html=(str)->
+stripHtml=(str)->
   (str\gsub "<[A-Za-z/!$][A-Za-z/!$ %-%_\"]*>", "")
 
 abbrCaps=(str)->
-  (str\gsub "[^A-Z]", "")
+  ( str\gsub "[^%u]*(%u?)(%u*)[^%u]*", (a,b) -> a .. b\lower! )
 
-{:getDoMsuffix, :formatDate, :getAge, :blankify_links, :strip_html, :abbrCaps}
+staticUrl = do
+  config = require"lapis.config".get!
+  (str) -> ( config.static_url_prefix or "/static" ) .. str
+
+
+{:getDoMsuffix, :formatDate, :getAge, :blankifyLinks, :stripHtml, :abbrCaps, :staticUrl}
