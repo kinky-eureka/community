@@ -5,6 +5,13 @@ import respond_to from require "lapis.application"
 
 import NULL from require "lapis.db"
 
+matchProfileAcl = (p,u,name)->
+  if p["acl_"..name.."_id"] and p["acl_"..name.."_id"]>0
+    acl=p["get_acl_"..name] p
+    return acl and acl\matchUser u
+  return false
+
+
 class extends lazuli.Application
   @enable "user_management"
 
@@ -14,12 +21,9 @@ class extends lazuli.Application
   [show: "/:id[%d]"]: =>
     @profiledata,err=Profiles\getOrCreateByUser tonumber @params.id
     if @profiledata
-      @acls={
-        gender:      @profiledata.acl_gender_id>0      and @profiledata\get_acl_gender!\matchUser      @modules.user_management.currentuser
-        birthday_y:  @profiledata.acl_birthday_y_id>0  and @profiledata\get_acl_birthday_y!\matchUser  @modules.user_management.currentuser
-        birthday_dm: @profiledata.acl_birthday_dm_id>0 and @profiledata\get_acl_birthday_dm!\matchUser @modules.user_management.currentuser
-        about:       @profiledata.acl_about_id>0       and @profiledata\get_acl_about!\matchUser       @modules.user_management.currentuser
-      }
+      @acls={i, matchProfileAcl @profiledata, @modules.user_management.currentuser, i for i in *{
+        "gender", "birthday_y", "birthday_dm", "about", "orientation", "preferred_role"
+      }}
       return render: true
     else
       return status: 404, "Error 404: "..err
@@ -41,10 +45,14 @@ class extends lazuli.Application
           about: @params.about or NULL
           birthday: @params.birthday\find"%d%d%d%d-%d%d?-%d%d?" and @params.birthday or NULL
           gender: @params.gender or NULL
+          orientation: @params.orientation or NULL
+          preferred_role: @params.preferred_role or NULL
           acl_gender_id: @params.acl_gender_id or NULL
           acl_birthday_y_id: @params.acl_birthday_y_id or NULL
           acl_birthday_dm_id: @params.acl_birthday_dm_id or NULL
           acl_about_id: @params.acl_about_id or NULL
+          acl_orientation_id: @params.acl_orientation_id or NULL
+          acl_preferred_role_id: @params.acl_preferred_role_id or NULL
         }
         return render: true
       else
