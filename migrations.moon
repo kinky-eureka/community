@@ -13,5 +13,6 @@ mixin_table migrations, require "lazuli.modules.user_management.migrations"
 mixin_model "profiles"
 mixin_model "acls"
 mixin_model "acl_entries"
+mixin_model "timelines"
 
 migrations
