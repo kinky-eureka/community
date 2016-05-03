@@ -9,10 +9,11 @@ class Timelines extends Model
     {"user",               belongs_to: "Users"}
     {"acl",                belongs_to: "ACLs"}
     {"flags",              fetch: =>
-      @flags={}
+      flags={}
       for k,v in pairs @@flags_values
         if type(k)=="number" and 0~=band(@flags_mask, 2^k)
-          @flags[v]=true
+          flags[v]=true
+      flags
     }
   }
   @constraints: {
@@ -22,6 +23,7 @@ class Timelines extends Model
         if type(k)=="number" and tbl[v]
           val=bor(val,2^k)
       obj.flags_mask=val
+      obj.flags=nil
       false
   }
 
