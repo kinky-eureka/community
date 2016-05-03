@@ -25,3 +25,4 @@ where `<environment>` is one of `development`, `test` or `production`.
     gitflow.prefix.support=support/
     gitflow.prefix.versiontag=v
 
+inited with "git-flow 1.8.0 (AVH Edition)"
