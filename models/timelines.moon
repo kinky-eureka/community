@@ -8,34 +8,7 @@ class Timelines extends Model
   @relations: {
     {"user",               belongs_to: "Users"}
     {"acl",                belongs_to: "ACLs"}
-    {"flags",              fetch: =>
-      flags={}
-      for k,v in pairs @@flags_values
-        if type(k)=="number" and 0~=band(@flags_mask, 2^k)
-          flags[v]=true
-      flags
-    }
   }
-  @constraints: {
-    flags: (tbl,_,obj) =>
-      val=0
-      for k,v in pairs @flags_values
-        if type(k)=="number" and tbl[v]
-          val=bor(val,2^k)
-      obj.flags_mask=val
-      obj.flags=nil
-      false
-  }
-
-
-  @flags_values: {
-    "markdown_posts"
-    "image_posts"
-    "video_posts"
-    "profile_updates"
-    "comments"
-  }
-
 
   @get_relation_model: (name)=> switch name
     when "Users"
@@ -49,7 +22,12 @@ class Timelines extends Model
         {"id", types.serial}
         {"user_id", types.integer}
         {"acl_id", types.integer}
-        {"flags_mask", types.integer}
+        --{"flag_include_posts_text", types.boolean}
+        --{"flag_include_posts_image", types.boolean}
+        --{"flag_include_posts_video", types.boolean}
+        --{"flag_include_comments", types.boolean}
+        --{"flag_include_likes", types.boolean}
+        --{"flag_include_profiles", types.boolean}
         "PRIMARY KEY (id)"
       }
 
