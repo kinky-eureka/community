@@ -12,6 +12,7 @@ class MainLayout extends html.Widget
         meta name:"viewport", content:"width=device-width, initial-scale=1"
         link rel:"stylesheet", href: staticUrl"/css/pure-min.css"
         link rel:"stylesheet", href: staticUrl"/css/main_layout.less.css"
+        render "views.widgets.favicon"
         script src: staticUrl"/js/jquery.min.js"
         script src: staticUrl"/js/dropdownmenu.js"
         title (
