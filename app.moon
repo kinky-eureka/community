@@ -21,7 +21,7 @@ class extends lazuli.Application
     return status: 400, "no payload" unless @params.payload
     pl=from_json @params.payload
     return status: 400, "broken payload" unless pl
-    return status: 428, "wrong branch" unless pl.ref == "refs/heads/deploy"
+    return status: 200, "wrong branch" unless pl.ref == "refs/heads/deploy" -- should be 428, but then githup fucks up
     require"os".execute "/usr/bin/nohup /bin/zsh ./githubhook.zsh > ./githubhook.log &"
 
   [make_invite_key: "/mik/:username"]: =>
