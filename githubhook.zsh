@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 at now + 1 minute <<END
   cd "$PWD"
   lib/lazuli/lapis term

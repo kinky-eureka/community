@@ -22,7 +22,7 @@ class extends lazuli.Application
     pl=from_json @params.payload
     return status: 400, "broken payload" unless pl
     return status: 428, "wrong branch" unless pl.ref == "refs/heads/deploy"
-    require"os".execute "/bin/zsh /githubhook.sh &"
+    require"os".execute "/usr/bin/nohup /bin/zsh ./githubhook.zsh > ./githubhook.log &"
 
   [make_invite_key: "/mik/:username"]: =>
     if @modules.user_management.currentuser
