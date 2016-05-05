@@ -1,6 +1,6 @@
 lazuli = require "lazuli"
 import respond_to from require "lapis.application"
-
+import from_json from require "lapis.util"
 import hmac_sha1, encode_base64 from require "lapis.util.encoding"
 config = (require "lapis.config").get!
 
@@ -16,6 +16,13 @@ class extends lazuli.Application
 
   [index: "/"]: =>
     "WIP!"
+
+  [githubhook: "/githubhook"]: =>
+    return status: 400, "no payload" unless @params.payload
+    pl=from_json @params.payload
+    return status: 400, "broken payload" unless pl
+    return status: 428, "wrong branch" unless pl.ref == "refs/heads/deploy"
+    require"os".execute "./githubhook.sh"
 
   [make_invite_key: "/mik/:username"]: =>
     if @modules.user_management.currentuser
