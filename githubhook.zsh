@@ -1,5 +1,8 @@
 #!/bin/zsh
-at now + 1 minute <<END
+at now <<END
+  unset LUA_PATH
+  unset LUA_CPATH
+  unset MOON_PATH
   cd "$PWD"
   {
     lib/lazuli/lapis term
