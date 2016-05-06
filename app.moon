@@ -23,6 +23,7 @@ class extends lazuli.Application
     return status: 400, "broken payload" unless pl
     return status: 200, "wrong branch" unless pl.ref == "refs/heads/deploy" -- should be 428, but then githup fucks up
     require"os".execute "/usr/bin/nohup /bin/zsh ./githubhook.zsh > ./githubhook.log &"
+    "ok"
 
   [make_invite_key: "/mik/:username"]: =>
     if @modules.user_management.currentuser
