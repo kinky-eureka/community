@@ -15,7 +15,7 @@ class extends lazuli.Application
     status: 404, "Error 404: Failed to find route: #{@req.cmd_url}"
 
   [index: "/"]: =>
-    "WIP!"
+    "This project is in "..config.projectStage.." stage."
 
   [githubhook: "/githubhook"]: =>
     return status: 400, "no payload" unless @params.payload
