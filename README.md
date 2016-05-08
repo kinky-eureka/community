@@ -1,6 +1,8 @@
 # KinkyEureka community
 [![Issues Ready](https://badge.waffle.io/kinky-eureka/community.svg?label=ready&title=Issues%20Ready)](http://waffle.io/kinky-eureka/community) [![In Progress](https://badge.waffle.io/kinky-eureka/community.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/kinky-eureka/community)
 
+versioning: until (including) alpha: `v0.0.*`; beta: `v0.*.*`; semantic versioning starting with `v1.0.0`
+
 ## setup
 
     git submodule update --init --recursive

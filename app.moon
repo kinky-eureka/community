@@ -1,6 +1,6 @@
 lazuli = require "lazuli"
 import respond_to from require "lapis.application"
-
+import from_json from require "lapis.util"
 import hmac_sha1, encode_base64 from require "lapis.util.encoding"
 config = (require "lapis.config").get!
 
@@ -15,7 +15,15 @@ class extends lazuli.Application
     status: 404, "Error 404: Failed to find route: #{@req.cmd_url}"
 
   [index: "/"]: =>
-    "WIP!"
+    "This project is in "..config.projectStage.." stage."
+
+  [githubhook: "/githubhook"]: =>
+    return status: 400, "no payload" unless @params.payload
+    pl=from_json @params.payload
+    return status: 400, "broken payload" unless pl
+    return status: 200, "wrong branch" unless pl.ref == "refs/heads/deploy" -- should be 428, but then githup fucks up
+    require"os".execute "/usr/bin/nohup /bin/zsh ./githubhook.zsh > ./githubhook.log &"
+    "ok"
 
   [make_invite_key: "/mik/:username"]: =>
     if @modules.user_management.currentuser
