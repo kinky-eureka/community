@@ -9,7 +9,7 @@ class RegisterWithKey extends Widget
       fieldset ->
         div class: "pure-control-group", ->
           label for: "username", "Username:"
-          input id: "username",name: "username"
+          input id: "username",name: "username", value: @params.uname or "", readonly: @paras.uname and "readonly" or nil
         div class: "pure-control-group", ->
           label for: "password", "Password:"
           input id: "password", type: "password", name: "password"
@@ -19,6 +19,6 @@ class RegisterWithKey extends Widget
         if config.projectStage=="alpha" or config.projectStage=="beta"
           div class: "pure-control-group", ->
             label for: "key", "Invitation Key ("..config.projectStage.."):"
-            input id: "key", name: "key", value: @params.key or ""
+            input id: "key", name: "key", value: @params.key or "", readonly: @paras.key and "readonly" or nil
         div class: "pure-controls", ->
           input type: "submit", class: "pure-button pure-button-primary"
