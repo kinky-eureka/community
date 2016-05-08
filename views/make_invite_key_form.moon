@@ -1,9 +1,10 @@
 import Widget from require "lapis.html"
-
+import escape from require "lapis.util"
 class extends Widget
   content: =>
     if @invkey
       h1 "Invite key created"
+      img style: "display: block; margin: 10px auto;width: 300px", src: "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chld=M|3&choe=UTF-8&chl="..escape("http://kinky-eureka.com/users/register?key="..@invkey)
       text "Give the following key to the person who wants to register as "
       b style: "background: rgba(0,0,0,0.8); padding: 2px;", @params.username
       text ":"
