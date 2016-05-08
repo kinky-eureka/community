@@ -19,6 +19,6 @@ class RegisterWithKey extends Widget
         if config.projectStage=="alpha" or config.projectStage=="beta"
           div class: "pure-control-group", ->
             label for: "key", "Invitation Key ("..config.projectStage.."):"
-            input id: "key", name: "key"
+            input id: "key", name: "key", value: @params.key or ""
         div class: "pure-controls", ->
           input type: "submit", class: "pure-button pure-button-primary"
