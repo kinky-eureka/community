@@ -15,18 +15,24 @@ class Timelines extends Model
   }
 
   fetchEntries: do
-    local all_users, acl
+    local all_users
     (per_page=nil)=>
       cuname = "users-"..@acl_id
       users = ngx.shared.timeline_cache\get cuname
-      if users
-        users=from_json users
       if not users
-        acl or= @get_acl!
+        acl = @get_acl!
         all_users or= Users\select!
-        users=[u.id for u in *all_users when acl\matchUser u]
-        ngx.shared.timeline_cache\set cuname, to_json(users), 30
-      OrderedPaginator Timeline_Entries "id", "where user_id in ?", list(users), per_page:per_page, order:"desc"
+        users=list [u.id for u in *all_users when acl\matchUser u]
+        ngx.shared.timeline_cache\set cuname, users, 30
+      ctname = "types-"..@id
+      types = ngx.shared.timeline_cache\get ctname
+      if not types
+        types=list [k for k,v in ipairs Timeline_Entries.types when @["flag_include_"..v.."s"]]
+        ngx.shared.timeline_cache\set ctname, types, 30
+      OrderedPaginator Timeline_Entries "id", [[where "user_id" in ? and "type" in ?]], users, types, {
+        per_page: per_page
+        order: "desc"
+      }
 
 
   @get_relation_model: (name)=> switch name
