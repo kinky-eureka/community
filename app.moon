@@ -25,6 +25,14 @@ class extends lazuli.Application
     require"os".execute "/usr/bin/nohup /bin/zsh ./githubhook.zsh > ./githubhook.log &"
     "ok"
 
+  [android_standalone_home:"/android_standalone_home"]: =>
+    @session.android_standalone=true
+    if @modules.user_management.currentuser
+      return redirect_to: @url_for "profile_show", id: @modules.user_management.currentuser.id
+    else
+      return redirect_to: @url_for "lazuli_modules_usermanagement_login"
+
+
   [make_invite_key: "/mik/:username"]: =>
     if @modules.user_management.currentuser
       if config.projectStage=="alpha" and @modules.user_management.currentuser.id==1 or config.projectStage=="beta"
