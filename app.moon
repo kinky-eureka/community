@@ -3,6 +3,7 @@ import respond_to from require "lapis.application"
 import from_json from require "lapis.util"
 import hmac_sha1, encode_base64 from require "lapis.util.encoding"
 config = (require "lapis.config").get!
+Users = require "lazuli.modules.user_management.models.users"
 
 class extends lazuli.Application
   @enable "user_management"
@@ -32,13 +33,12 @@ class extends lazuli.Application
     else
       return redirect_to: @url_for "lazuli_modules_usermanagement_login"
 
-
-  [make_invite_key: "/mik/:username"]: =>
+  [make_invite_key: "/make_invite_key/:username"]: =>
     if @modules.user_management.currentuser
-      if config.projectStage=="alpha" and @modules.user_management.currentuser.id==1 or config.projectStage=="beta"
+      if config.projectStage=="alpha" and @modules.user_management.currentuser.is_admin or config.projectStage=="beta"
         return layout: false, encode_base64 hmac_sha1 config.secret, @params.username
 
-  [make_invite_key_form: "/mik"]: respond_to {
+  [make_invite_key_form: "/make_invite_key"]: respond_to {
     GET: =>
       if not @modules.user_management.currentuser
         return redirect_to: @url_for "lazuli_modules_usermanagement_login"
@@ -55,3 +55,10 @@ class extends lazuli.Application
       @invkey=encode_base64 hmac_sha1 config.secret, @params.username
       render: true
   }
+
+  [find_profile_by_name: "/:name"]: =>
+    u = Users\find username: @params.name
+    if u and u.id and u.id > 0
+      return redirect_to: @url_for "profile_show", id: u.id
+    else
+      return status: 404, "Error 404: User not found"
