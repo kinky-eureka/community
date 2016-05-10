@@ -11,6 +11,8 @@ class extends Widget
       pre style: "background: rgba(0,0,0,0.8); padding: 1em; margin: 1em; text-align: center;",->
         code ->
           text @invkey
+          br!
+          text "http://kinky-eureka.com/users/register?uname="..escape(@params.username).."&key="..escape(@invkey)
       h2 "Create another"
     else
       h1 "Create invite key"
