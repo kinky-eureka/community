@@ -22,5 +22,6 @@ class MainLayout extends html.Widget
         )
       body class:"route-"..@route_name..(type(@body_classes)=="string" and " "..@body_classes or ""),->
         render "views.widgets.header"
+        --render "views.widgets.ads"
         div class:"content",->
           @content_for "inner"
