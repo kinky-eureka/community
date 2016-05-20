@@ -17,6 +17,7 @@ config {"development","test"}, ->
   secret "<EDIT THIS>"
   port 8080
   acl_cache_size "1m"
+  timeline_cache_size "1m"
   static_url_prefix "/static"
   modules ->
     user_management ->
@@ -30,6 +31,7 @@ config "production", ->
   port 8081 -- EDIT THIS
   page_cache_size "10m"
   acl_cache_size "5m"
+  timeline_cache_size "5m"
   static_url_prefix "/static"
   session_name "<EDIT THIS>"
   secret "<EDIT THIS>"
