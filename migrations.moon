@@ -2,7 +2,7 @@ import mixin_table from require "moon"
 import create_table, types, add_column from require "lapis.db.schema"
 
 migrations={
-  ["custom_user_management_000001"]: ->
+  ["zzz_custom_user_management_000001"]: ->
     add_column "lazuli_modules_user_management_users", "is_admin", types.boolean default:false
 }
 
